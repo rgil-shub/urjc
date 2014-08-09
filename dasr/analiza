@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #
-# Diseño y Administración de Sistemas y Redes.
-# Practica 1: Análisis de directorios.
+# DiseÃ±o y AdministraciÃ³n de Sistemas y Redes.
+# Practica 1: AnÃ¡lisis de directorios.
 # Autor: Roberto Gil
 # Fecha: 2005-03-15
 #
 
 if [ $# != 1 ] ; then
-   echo "Número de argumentos incorrecto"
+   echo "NÃºmero de argumentos incorrecto"
 elif test -d $1 ; then
 
    TOTAL=$(find $1 | wc -l)
@@ -41,7 +41,7 @@ elif test -d $1 ; then
    ENLACES_AUX=`expr $ENLACES \* 100`
    XENLACES=`expr $ENLACES_AUX / $TOTAL`
 
-   echo Análisis de $1 
+   echo AnÃ¡lisis de $1 
    echo "$TOTAL ficheros encontrados:"
    if [ $NORMALES != 0 ] ; then
       echo " * $NORMALES ficheros normales ($XNORMALES%)"
@@ -62,7 +62,7 @@ elif test -d $1 ; then
       echo " * $SOCKETS sockets ($SOCKETS%)"
    fi
    if [ $ENLACES != 0 ] ; then
-      echo " * $ENLACES enlaces simbólicos ($XENLACES%)"   
+      echo " * $ENLACES enlaces simbÃ³licos ($XENLACES%)"   
    fi
 else
    echo $1": No es un directorio"

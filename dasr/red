@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Dise駉 y Administraci髇 de Sistemas y Redes.
+# Dise帽o y Administraci贸n de Sistemas y Redes.
 # Practica 4: Monitorizacion de red
 # Autor: Roberto Gil
 # Fecha: 2005-05-21
@@ -13,7 +13,7 @@ echo "*** Existen en total $total_num_ifaces interfaces de red:" $total_ifaces
 
 active_ifaces=`ifconfig | grep encap | cut -d " " -f1`
 active_num_ifaces=`ifconfig | grep encap | cut -d " " -f1 | wc -l`
-echo -e "\n*** De los $total_num_ifaces interfaces de red, $active_num_ifaces de ellos est醤 activos:"
+echo -e "\n*** De los $total_num_ifaces interfaces de red, $active_num_ifaces de ellos est谩n activos:"
 
 echo -e "\nInterface HWaddr                IP              Broadcast       Netmask"
 echo "------- ----------------------- --------------- --------------- --------------"
@@ -123,15 +123,15 @@ echo "--------------- ----------------- ---------"
 
 num_ports_tcp=`netstat -an | grep -w tcp | grep LISTEN | wc -l`
 ports_tcp=`netstat -an | grep -w tcp | grep LISTEN | cut -d: -f2 | cut -d " " -f1` 
-echo -e "\n*** $num_ports_tcp puertos TCP en espera de una nueva conexi髇:" $ports_tcp
+echo -e "\n*** $num_ports_tcp puertos TCP en espera de una nueva conexi贸n:" $ports_tcp
 
 num_ports_udp=`netstat -an | grep -w udp | grep LISTEN | wc -l`
 ports_udp=`netstat -an | grep -w udp | grep LISTEN | cut -d: -f2 | cut -d " " -f1`
-echo -e "\n*** $num_ports_tcp puertos UDP en espera de una nueva conexi髇:" $ports_tcp
+echo -e "\n*** $num_ports_tcp puertos UDP en espera de una nueva conexi贸n:" $ports_tcp
 
 num_dns=`cat /etc/resolv.conf | grep -v ^# | grep [[:digit:]] | wc -l`
 dns=`cat /etc/resolv.conf | grep -v ^# | grep [[:digit:]] | cut -d " " -f2`
-echo -e "\n*** $num_dns nameservers en la configuraci髇 del DNS:" $dns
+echo -e "\n*** $num_dns nameservers en la configuraci贸n del DNS:" $dns
 
 num_hosts=`cat /etc/hosts | grep -v ^# | grep [[:digit:]] | wc -l`
 echo -e "\n*** $num_hosts entradas en el fichero /etc/hosts."

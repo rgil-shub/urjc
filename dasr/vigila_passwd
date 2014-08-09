@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #
-# DiseÒo y AdministraciÛn de Sistemas y Redes.
-# Practica 3: Vigilancia y supervisiÛn del sistema.
+# Dise√±o y Administraci√≥n de Sistemas y Redes.
+# Practica 3: Vigilancia y supervisi√≥n del sistema.
 # Autor: Roberto Gil
 #
 
@@ -15,7 +15,7 @@ GROUP="/etc/group"
 SHADOW="/etc/shadow"
 
 
-# Comprobar que cada fichero tiene informaciÛn valida
+# Comprobar que cada fichero tiene informaci√≥n valida
 
 check_files () {
 
@@ -24,7 +24,7 @@ check_files () {
     #( 6 : ) 
     lines=`cat $PASSWD | egrep -nv ".*:.*:.*:.*:.*:.*:.*" | cut -d: -f1`
     for i in $lines ; do 
-        echo "Error en la lÌnea $i del fichero /etc/passwd (numero de campos incorrecto)"
+        echo "Error en la l√≠nea $i del fichero /etc/passwd (numero de campos incorrecto)"
     done
 
     # Login compuesto por letras
@@ -32,7 +32,7 @@ check_files () {
     for i in `awk -F: '{print $1}' $PASSWD`; do
         line=`expr $line + 1`
         if [ `echo $i | grep [[:digit:]]` ] ; then
-            echo "Error en la lÌnea $line del fichero /etc/passwd (login con numeros)"
+            echo "Error en la l√≠nea $line del fichero /etc/passwd (login con numeros)"
         fi
     done
 
@@ -41,9 +41,9 @@ check_files () {
     for i in `awk -F: '{print $3}' $PASSWD`; do 
         line=`expr $line + 1`
         if [ `echo $i | grep [a-zA-Z]` ] ; then
-            echo "Error en la lÌnea $line del fichero /etc/passwd (UID con letras)"
+            echo "Error en la l√≠nea $line del fichero /etc/passwd (UID con letras)"
         elif [ $i -gt 65535 ] || [ $i -lt 0 ] ; then
-            echo "Error en la lÌnea $line del fichero /etc/passwd (UID con valor fuera de rango)"
+            echo "Error en la l√≠nea $line del fichero /etc/passwd (UID con valor fuera de rango)"
         fi
     done  
 
@@ -52,9 +52,9 @@ check_files () {
     for i in `awk -F: '{print $4}' $PASSWD`; do
         line=`expr $line + 1`
         if [ `echo $i | grep [a-zA-Z]` ] ; then
-            echo "Error en la lÌnea $line del fichero /etc/passwd (GUID con letras)"
+            echo "Error en la l√≠nea $line del fichero /etc/passwd (GUID con letras)"
         elif [ $i -gt 65535 ] || [ $i -lt 0 ] ; then
-            echo "Error en la lÌnea $line del fichero /etc/passwd (GUID con valor fuera de rango)"
+            echo "Error en la l√≠nea $line del fichero /etc/passwd (GUID con valor fuera de rango)"
         fi
     done 
 
@@ -64,7 +64,7 @@ check_files () {
     # ( 8 : )
     lines=`cat $SHADOW | egrep -nv ".*:.*:.*:.*:.*:.*:.*:.*:.*" | cut -d: -f1`
     for i in $lines ; do
-        echo "Error en la lÌnea $i del fichero /etc/shadow (numero de campos incorrecto)"
+        echo "Error en la l√≠nea $i del fichero /etc/shadow (numero de campos incorrecto)"
     done
 
     # Login compuesto por letras
@@ -72,7 +72,7 @@ check_files () {
     for i in `awk -F: '{print $1}' $SHADOW`; do
         line=`expr $line + 1`
         if [ `echo $i | grep [[:digit:]]` ] ; then             
-            echo "Error en la lÌnea $line del fichero /etc/shadow (login con numeros)"
+            echo "Error en la l√≠nea $line del fichero /etc/shadow (login con numeros)"
         fi
     done
 
@@ -82,7 +82,7 @@ check_files () {
     # ( 3 : )
     lines=`cat $GROUP | egrep -nv ".*:.*:.*:.*" | cut -d: -f1`
     for i in $lines ; do
-        echo "Error en la lÌnea $i del fichero /etc/group  (numero de campos incorrecto)"
+        echo "Error en la l√≠nea $i del fichero /etc/group  (numero de campos incorrecto)"
     done
 
     # GUID con valor entre 0 y 65535
@@ -90,34 +90,34 @@ check_files () {
     for i in `awk -F: '{print $3}' $GROUP`; do
         line=`expr $line + 1`
         if [ `echo $i | grep [a-zA-Z]` ] ; then
-            echo "Error en la lÌnea $line del fichero /etc/group  (GUID con letras)"
+            echo "Error en la l√≠nea $line del fichero /etc/group  (GUID con letras)"
         elif [ $i -gt 65535 ] || [ $i -lt 0 ] ; then
-            echo "Error en la lÌnea $line del fichero /etc/group  (GUID con valor fuera de rango)"
+            echo "Error en la l√≠nea $line del fichero /etc/group  (GUID con valor fuera de rango)"
         fi
     done
 }
 
 
-# Comprueba si hay alg˙n login en el /etc/passwd que no este en el 
+# Comprueba si hay alg√∫n login en el /etc/passwd que no este en el 
 # /etc/shadow, o viceversa.
 
 check_login () {
 
     for user in `awk -F: '{print $1}' $PASSWD`; do 
         if [ "`grep $user $SHADOW`" == "" ]; then
-            echo "El usuario $user est· en /etc/passwd pero no en /etc/shadow"
+            echo "El usuario $user est√° en /etc/passwd pero no en /etc/shadow"
         fi
     done
 
     for user in `awk -F: '{print $1}' $SHADOW`; do 
         if [ "`grep $user $PASSWD`" == "" ]; then
-            echo "El usuario $user est· en /etc/shadow pero no en /etc/passwd"
+            echo "El usuario $user est√° en /etc/shadow pero no en /etc/passwd"
         fi
     done
 }
 
 
-# Comprueba si alguna lÌnea del /etc/group contiene un login que no estÈ en el
+# Comprueba si alguna l√≠nea del /etc/group contiene un login que no est√© en el
 # /etc/passwd
 
 check_lines () {
@@ -136,7 +136,7 @@ check_lines () {
 }
 
 
-# Comprueba si dos lÌneas del /etc/passwd o dos lÌneas del /etc/shadow 
+# Comprueba si dos l√≠neas del /etc/passwd o dos l√≠neas del /etc/shadow 
 # contienen el mismo login
 
 search_login_repeats () {
@@ -144,33 +144,33 @@ search_login_repeats () {
     for i in `awk -F: '{print $1}' $PASSWD | sort -g | uniq` ; do
         repeats=`cat $PASSWD | grep -w ^$i | wc -l`
         if [ $repeats -eq 2 ] ; then
-            echo "El usuario $i est· repetido en el fichero /etc/passwd"
+            echo "El usuario $i est√° repetido en el fichero /etc/passwd"
         fi
     done
     
     for i in `awk -F: '{print $1}' $SHADOW | sort -g | uniq` ; do
         repeats=`cat $SHADOW | grep -w ^$i | wc -l`
         if [ $repeats -eq 2 ] ; then
-            echo "El usuario $i est· repetido en el fichero /etc/shadow"
+            echo "El usuario $i est√° repetido en el fichero /etc/shadow"
         fi
     done
 }
 
 
-# Comprueba si dos lÌneas del /etc/group contienen el mismo nombre de grupo
+# Comprueba si dos l√≠neas del /etc/group contienen el mismo nombre de grupo
 
 search_group_repeats () {
 
     for i in `awk -F: '{print $1}' $GROUP | sort -g | uniq` ; do
         repeats=`cat $GROUP | grep -w ^$i | wc -l`
         if [ $repeats -eq 2 ] ; then
-            echo "El grupo $i est· repetido en el fichero /etc/group"
+            echo "El grupo $i est√° repetido en el fichero /etc/group"
         fi
     done
 }
 
 
-# Comprueba si el /etc/passwd tiene dos lÌneas con el mismo UID
+# Comprueba si el /etc/passwd tiene dos l√≠neas con el mismo UID
 
 search_UID_repeats () {
 
@@ -185,7 +185,7 @@ search_UID_repeats () {
 }
 
 
-# Comprueba si el /etc/group tiene dos lÌneas con el mismo GID
+# Comprueba si el /etc/group tiene dos l√≠neas con el mismo GID
 
 search_GID_repeats () {
  
@@ -200,13 +200,13 @@ search_GID_repeats () {
 }
 
 
-# Comprueba si hay usuarios sin contraseÒa (campo passwd vacÌo en el 
+# Comprueba si hay usuarios sin contrase√±a (campo passwd vac√≠o en el 
 # /etc/passwd  o en el /etc/shadow)
 
 search_no_pass () {
 
     for i in `awk -F: '{if ($2 == "") print $1}' $PASSWD $SHADOW | sort | uniq` ; do
-        echo "El usuario $i no tiene contraseÒa"
+        echo "El usuario $i no tiene contrase√±a"
     done
 }
     

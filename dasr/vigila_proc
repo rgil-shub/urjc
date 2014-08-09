@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #
-# Diseño y Administración de Sistemas y Redes.
-# Practica 3: Vigilancia y supervisión del sistema.
+# DiseÃ±o y AdministraciÃ³n de Sistemas y Redes.
+# Practica 3: Vigilancia y supervisiÃ³n del sistema.
 # Autor: Roberto Gil
 #
 
@@ -36,7 +36,7 @@ search_diferent_users () {
 search_max_pid () {
 
     PID_MAX=`ls -d [[:digit:]]* | sort -g | tail --lines 1`
-    echo "El PID más alto es el $PID_MAX"
+    echo "El PID mÃ¡s alto es el $PID_MAX"
 }
 
 
@@ -54,5 +54,5 @@ search_max_pid_fd () {
         fi
     done
     
-    echo "El PID $i es el que más ficheros abiertos tiene ($FD_MAX en total)"
+    echo "El PID $i es el que mÃ¡s ficheros abiertos tiene ($FD_MAX en total)"
 }
