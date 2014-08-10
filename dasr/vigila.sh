@@ -15,9 +15,9 @@
 # passwd -> vigila_passwd
 
 
-. vigila_files
-. vigila_proc
-. vigila_passwd
+. vigila_files.sh
+. vigila_proc.sh
+. vigila_passwd.sh
 
 
 if [ $# != 1 ] ; then
